@@ -1,26 +1,67 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --spacing-small: 2vw;
+  --spacing-main: 4vw;
+  --spacing-large: clamp(0px, 80px, 8vw);
+  --color-opacity: #a0a0a0a0;
 }
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  all: unset;
+}
+
+.h1 {
+  @apply text-5xl font-bold;
+  @apply ml-main;
+}
+
+.h2 {
+  @apply text-2xl font-bold italic;
+  @apply ml-2;
+}
+
+.h3 {
+  @apply text-xl font-bold;
+  @apply ml-5;
+}
+
+.h4 {
+  @apply italic ;
+  @apply ml-5;
+}
+
+.main {
+  @apply italic ;
+}
+.head {
+  @apply font-bold;
+}
+
+.header-link {
+  @apply text-xl font-bold cursor-pointer;
+}
+
+.section {
+  @apply w-full flex justify-center;
+}
+
+.overlay {
+  @apply fixed top-0 left-0 size-full z-50 p-large;
+  @apply overflow-y-scroll;
+  @apply backdrop-blur-[1px];
+}
+
+.credit {
+  @apply backdrop-blur backdrop-brightness-50 w-fit p-0.5;
+  @apply text-xs;
+}
+
+.dotborder {
+  @apply border-dotted border-black;
+}
+.modal-container {
+  @apply h-fit min-h-full w-full;
+  @apply bg-white;
+  @apply border-dotted border-black border-2;
+  @apply p-large
 }
