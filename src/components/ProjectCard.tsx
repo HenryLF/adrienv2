@@ -32,35 +32,36 @@ export default function ProjectCard({ data }: PropType) {
       1
     );
   }, [activeIndex]);
-  if (data)
-    return (
-      <ClickableModal content={<ProjectPage data={data} />}>
+
+  if (!data) return;
+  const activeImage = data.pictures?.at(activeIndex)?.image;
+  return (
+    <ClickableModal content={<ProjectPage data={data} />}>
+      <div
+        className="size-full overflow-hidden relative"
+        onMouseEnter={() => setMouseOver(true)}
+        onMouseLeave={() => setMouseOver(false)}
+      >
+        {activeImage && (
+          <Image
+            src={urlFor(activeImage).url()}
+            fill
+            className="object-cover"
+            alt={data?.pictures?.at(0)?.alt ?? ""}
+          />
+        )}
         <div
-          className="size-full overflow-hidden relative"
-          onMouseEnter={() => setMouseOver(true)}
-          onMouseLeave={() => setMouseOver(false)}
-        >
-          {data?.pictures?.at(activeIndex)?.image && (
-            <Image
-              src={urlFor(data.pictures?.at(activeIndex)?.image).url()}
-              fill
-              className="object-cover"
-              alt={data?.pictures?.at(0)?.alt ?? ""}
-            />
-          )}
-          <div
-            className={`min-h-1/5 w-full bottom-0 left-0 absolute p-2
+          className={`min-h-1/5 w-full bottom-0 left-0 absolute p-2
             ${mouseOver ? "translate-0" : "translate-y-full"}
             transition-transform duration-500 ease-in-out
             backdrop-blur
             dotborder border-t-2
             `}
-          >
-            <h2 className="h2">{data?.name}</h2>
-            <h3 className="h3">{data?.year}</h3>
-          </div>
+        >
+          <h2 className="h2">{data?.name}</h2>
+          <h3 className="h3">{data?.year}</h3>
         </div>
-      </ClickableModal>
-    );
-  return <></>
+      </div>
+    </ClickableModal>
+  );
 }

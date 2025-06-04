@@ -1,9 +1,8 @@
 "use client";
 
-import  { ReactElement, cloneElement, useState } from "react";
-
+import  { ReactElement, cloneElement, useState, MouseEventHandler } from "react";
 type PropType = {
-  children: ReactElement;
+  children: ReactElement<{ onClick?: MouseEventHandler }>;
   content: ReactElement;
 };
 
@@ -18,8 +17,6 @@ export default function ClickableModal({ content, children }: PropType) {
     <>
       {children}
       <section className="section overlay" onClick={() => setVisible(false)}>
-        {/* {cloneElement(content, { onClick: (e) => e.stopPropagation() })}
-         */}
          {content}
       </section>
     </>

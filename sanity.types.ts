@@ -267,7 +267,23 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = Portfolio | Background | Bio | Picture | Project | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes =
+  | Portfolio
+  | Background
+  | Bio
+  | Picture
+  | Project
+  | SanityImagePaletteSwatch
+  | SanityImagePalette
+  | SanityImageDimensions
+  | SanityImageHotspot
+  | SanityImageCrop
+  | SanityFileAsset
+  | SanityImageAsset
+  | SanityImageMetadata
+  | Geopoint
+  | Slug
+  | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/query.ts
 // Variable: ALL_PROJECT_QUERY
@@ -446,16 +462,16 @@ export type BACKGROUND_QUERYResult = {
 } | null;
 // Variable: PORTFOLIO_QUERY
 // Query: *[_type == "portfolio" && _id =="portfolio"]{..., asset-> {url}}[0]
-export type PORTFOLIO_QUERYResult = null;
+export type PORTFOLIO_QUERYResult = { asset: { url: string } };
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"project\"]{... , pictures[]->{...}}": ALL_PROJECT_QUERYResult;
-    "*[_type == \"project\" && slug.current == $slug]{... , pictures[]->{...}}[0]": PROJECT_QUERYResult;
-    "*[_type == \"bio\" && _id==\"bio\" ]{...}[0]": BIO_QUERYResult;
-    "*[_type == \"background\" && _id == \"background\"]{...}[0]": BACKGROUND_QUERYResult;
-    "*[_type == \"portfolio\" && _id ==\"portfolio\"]{..., asset-> {url}}[0]": PORTFOLIO_QUERYResult;
+    '*[_type == "project"]{... , pictures[]->{...}}': ALL_PROJECT_QUERYResult;
+    '*[_type == "project" && slug.current == $slug]{... , pictures[]->{...}}[0]': PROJECT_QUERYResult;
+    '*[_type == "bio" && _id=="bio" ]{...}[0]': BIO_QUERYResult;
+    '*[_type == "background" && _id == "background"]{...}[0]': BACKGROUND_QUERYResult;
+    '*[_type == "portfolio" && _id =="portfolio"]{..., asset-> {url}}[0]': PORTFOLIO_QUERYResult;
   }
 }

@@ -1,9 +1,9 @@
-"use client"
+"use client";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import { Picture } from "../../sanity.types";
 import { useState } from "react";
-import { getImageDimensions } from "@sanity/asset-utils";
+import { getImageDimensions, SanityImageSource } from "@sanity/asset-utils";
 
 type PropType = {
   picture: Picture;
@@ -17,7 +17,10 @@ export function SanityImage({
   className = "",
 }: PropType) {
   const [mouseOver, setMouseOver] = useState<boolean>(false);
-  const { aspectRatio } = getImageDimensions(picture.image);
+
+  const { image } = picture;
+  if (!image) return <></>;
+  const { aspectRatio } = getImageDimensions(image as SanityImageSource);
 
   const isSquare = Math.abs(aspectRatio - 1) < 0.1;
   if (picture?.image)

@@ -10,7 +10,8 @@ export const structure: StructureResolver = (S) =>
     .title("Content")
     .items([
       ...S.documentTypeListItems().filter(
-        (item) => !singletonTypeLabel().some((type) => type.name == item.getId())
+        (item) =>
+          !singletonTypeLabel().some((type) => type.name == item.getId())
       ),
       ...singletonListBuilder().map((builder) => builder(S)),
     ]);
