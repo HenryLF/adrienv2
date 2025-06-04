@@ -6,6 +6,7 @@ import { useEffect, useReducer, useRef, useState } from "react";
 import { urlFor } from "@/sanity/lib/image";
 import ProjectPage from "./ProjectPage";
 import ClickableModal from "./ClickableModal";
+import { SanityImageSource } from "@sanity/asset-utils";
 type PropType = {
   data?: PROJECT_QUERYResult;
 };
@@ -42,14 +43,14 @@ export default function ProjectCard({ data }: PropType) {
         onMouseEnter={() => setMouseOver(true)}
         onMouseLeave={() => setMouseOver(false)}
       >
-        {activeImage && (
+        {
           <Image
-            src={urlFor(activeImage).url()}
+            src={urlFor(data.pictures?.at(0)?.image as SanityImageSource).url()}
             fill
             className="object-cover"
             alt={data?.pictures?.at(0)?.alt ?? ""}
           />
-        )}
+        }
         <div
           className={`min-h-1/5 w-full bottom-0 left-0 absolute p-2
             ${mouseOver ? "translate-0" : "translate-y-full"}
