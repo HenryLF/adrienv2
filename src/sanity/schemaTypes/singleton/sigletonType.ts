@@ -2,8 +2,14 @@ import { StructureBuilder } from "sanity/structure";
 import bioType from "./bioType";
 import backgroundType from "./backgroundType";
 import portfolioType from "./portfolioType";
+import oscillobatType from "./oscillobatType";
 
-export const singletonTypeList = [bioType, backgroundType, portfolioType];
+export const singletonTypeList = [
+  bioType,
+  backgroundType,
+  portfolioType,
+  oscillobatType,
+];
 
 export const singletonTypeLabel = () =>
   singletonTypeList.map((type) => ({

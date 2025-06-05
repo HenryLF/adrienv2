@@ -16,7 +16,7 @@ export default function ProjectPage({ data }: PropType) {
         <h3 className="h3">{data?.year}</h3>
       </div>
       <TextMain content={data?.description ?? []} />
-      <div className="flex flex-col w-full space-y-small p-main">
+      <div className="flex flex-col space-y-small px-main">
         {data?.pictures?.map((pic, key) => {
           if (key == 0) {
             return <SanityImage picture={pic} key={key} className="w-full" />;

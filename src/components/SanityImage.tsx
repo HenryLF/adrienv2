@@ -8,7 +8,8 @@ import { getImageDimensions, SanityImageSource } from "@sanity/asset-utils";
 type PropType = {
   picture: Picture;
   creditRight?: boolean;
-  className: string;
+  className?: string;
+  maxHeight? : string;
 };
 
 export function SanityImage({

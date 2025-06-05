@@ -2,12 +2,19 @@ import Image from "next/image";
 import Link from "next/link";
 import ClickableModal from "./ClickableModal";
 import { client } from "@/sanity/lib/client";
-import { BIO_QUERY, PORTFOLIO_QUERY } from "@/sanity/lib/query";
+import {
+  BIO_QUERY,
+  OSCILLOBAT_QUERY,
+  PORTFOLIO_QUERY,
+} from "@/sanity/lib/query";
 import BioPage from "./BioPage";
+import OscilloPage from "./OscilloPage";
 
 export default async function Header() {
   const bioData = await client.fetch(BIO_QUERY);
   const portfolioData = await client.fetch(PORTFOLIO_QUERY);
+  const oscilloData = await client.fetch(OSCILLOBAT_QUERY);
+
   return (
     <header
       className="flex flex-row flex-wrap justify-between items-center 
@@ -16,7 +23,7 @@ export default async function Header() {
       <Link href="/">
         <h1 className="h1 ">Adrien Milon</h1>
       </Link>
-      
+
       <div className="flex flex-row justify-evenly items-center flex-1">
         <Link href={portfolioData?.asset?.url ?? "/"}>
           <span className="header-link">PortFolio</span>
@@ -26,7 +33,7 @@ export default async function Header() {
           <span className="header-link">BIO</span>
         </ClickableModal>
 
-        <ClickableModal content={<BioPage data={bioData} />}>
+        <ClickableModal content={<OscilloPage data={oscilloData} />}>
           <span className="header-link">Oscillobat</span>
         </ClickableModal>
 

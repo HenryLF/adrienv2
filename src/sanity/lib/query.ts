@@ -20,3 +20,11 @@ export const PORTFOLIO_QUERY = defineQuery(
   `*[_type == "portfolio" && _id =="portfolio"]{..., asset-> {url}}[0]`
 );
 
+export const OSCILLOBAT_QUERY = defineQuery(
+  `*[_type == "oscillobat" && _id =="oscillobat"]{
+  slices[] {
+    _type != "textblock" => @->{image , alt, credit},
+    _type == "textblock" => @,
+    }
+  }[0].slices`
+);

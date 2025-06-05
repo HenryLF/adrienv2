@@ -56,6 +56,7 @@ export default function ProjectCard({ data }: PropType) {
             fill
             className="object-cover"
             alt={data?.pictures?.at(0)?.alt ?? ""}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         }
         <div
