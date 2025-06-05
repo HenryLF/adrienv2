@@ -1,6 +1,5 @@
 import Image from "next/image";
-import { OSCILLOBAT_QUERYResult, Picture } from "../../sanity.types";
-import { SanityImage } from "./SanityImage";
+import { OSCILLOBAT_QUERYResult } from "../../sanity.types";
 import { TextMain } from "./SanityText";
 import { urlFor } from "@/sanity/lib/image";
 import { SanityImageSource } from "@sanity/asset-utils";
@@ -20,6 +19,7 @@ export default function OscilloPage({
         }
         return (
           <Image
+            key={key}
             src={urlFor(slice.image as SanityImageSource).url()}
             height={100}
             width={100}
