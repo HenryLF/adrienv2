@@ -13,8 +13,16 @@ type PropType = {
 
 const TRANSITION_DURATION = 5_000;
 
+function isTouchDevice() {
+  return "ontouchstart" in globalThis;
+}
+
 export default function ProjectCard({ data }: PropType) {
-  const [mouseOver, setMouseOver] = useState<boolean>(false);
+  const [mouseOver, setMouseOver] = useState(false);
+
+  useEffect(() => {
+    setMouseOver(isTouchDevice());
+  }, []);
 
   const picturesLength = data?.pictures?.length ?? 1;
   const randomSeed = useRef<number>(Math.random() * 0.2 + 1);
