@@ -35,7 +35,6 @@ export default function ProjectCard({ data }: PropType) {
   }, [activeIndex]);
 
   if (!data) return;
-  const activeImage = data.pictures?.at(activeIndex)?.image;
   return (
     <ClickableModal content={<ProjectPage data={data} />}>
       <div

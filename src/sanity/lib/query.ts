@@ -19,3 +19,4 @@ export const BACKGROUND_QUERY = defineQuery(
 export const PORTFOLIO_QUERY = defineQuery(
   `*[_type == "portfolio" && _id =="portfolio"]{..., asset-> {url}}[0]`
 );
+
