@@ -25,6 +25,7 @@ export default defineType({
         {
           title: "Photographie",
           type: "reference",
+          name: "picture",
           to: [pictureType],
         },
       ],

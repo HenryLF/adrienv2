@@ -50,14 +50,21 @@ export type Oscillobat = {
 };
 
 export type Portfolio = {
+  _id: string;
   _type: "portfolio";
-  asset?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  PDF?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+    };
+    media?: unknown;
+    _type: "file";
   };
-  media?: unknown;
 };
 
 export type Background = {
@@ -480,11 +487,11 @@ export type BACKGROUND_QUERYResult = {
     _type: "image";
   };
 } | null;
-// Variable: PORTFOLIO_QUERY
-// Query: *[_type == "portfolio" && _id =="portfolio"]{..., asset-> {url}}[0]
-export type PORTFOLIO_QUERYResult = null;
+// Variable: PORTFOLIO_URL_QUERY
+// Query: *[_type == "portfolio" && _id =="portfolio"]{ PDF {asset -> {url}}}[0].PDF.asset.url
+export type PORTFOLIO_URL_QUERYResult = string | null;
 // Variable: OSCILLOBAT_QUERY
-// Query: *[_type == "oscillobat" && _id =="oscillobat"]{  slices[] {    _type != "textblock" => @->{image , alt, credit},    _type == "textblock" => @,    }  }[0].slices
+// Query: *[_type == "oscillobat" && _id =="oscillobat"]{  slices[] {    _type != "textblock" => @->{image , alt, credit , _type},    _type == "textblock" => @,    }  }[0].slices
 export type OSCILLOBAT_QUERYResult = Array<{
   content?: Array<{
     children?: Array<{
@@ -521,6 +528,7 @@ export type OSCILLOBAT_QUERYResult = Array<{
   } | null;
   alt: string | null;
   credit: string | null;
+  _type: "picture";
 }> | null;
 
 // Query TypeMap
@@ -531,7 +539,7 @@ declare module "@sanity/client" {
     "*[_type == \"project\" && slug.current == $slug]{... , pictures[]->{...}}[0]": PROJECT_QUERYResult;
     "*[_type == \"bio\" && _id==\"bio\" ]{...}[0]": BIO_QUERYResult;
     "*[_type == \"background\" && _id == \"background\"]{...}[0]": BACKGROUND_QUERYResult;
-    "*[_type == \"portfolio\" && _id ==\"portfolio\"]{..., asset-> {url}}[0]": PORTFOLIO_QUERYResult;
-    "*[_type == \"oscillobat\" && _id ==\"oscillobat\"]{\n  slices[] {\n    _type != \"textblock\" => @->{image , alt, credit},\n    _type == \"textblock\" => @,\n    }\n  }[0].slices": OSCILLOBAT_QUERYResult;
+    "*[_type == \"portfolio\" && _id ==\"portfolio\"]{ PDF {asset -> {url}}}[0].PDF.asset.url": PORTFOLIO_URL_QUERYResult;
+    "*[_type == \"oscillobat\" && _id ==\"oscillobat\"]{\n  slices[] {\n    _type != \"textblock\" => @->{image , alt, credit , _type},\n    _type == \"textblock\" => @,\n    }\n  }[0].slices": OSCILLOBAT_QUERYResult;
   }
 }

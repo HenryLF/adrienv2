@@ -23,7 +23,7 @@ export default function OscilloPage({
             src={urlFor(slice.image as SanityImageSource).url()}
             height={100}
             width={100}
-            alt={slice.alt}
+            alt={slice.alt ?? "Une photo de l'Oscillobat."}
             className="w-8/10 h-auto"
           />
         );

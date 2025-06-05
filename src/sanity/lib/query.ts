@@ -16,14 +16,14 @@ export const BACKGROUND_QUERY = defineQuery(
   `*[_type == "background" && _id == "background"]{...}[0]`
 );
 
-export const PORTFOLIO_QUERY = defineQuery(
-  `*[_type == "portfolio" && _id =="portfolio"]{..., asset-> {url}}[0]`
+export const PORTFOLIO_URL_QUERY = defineQuery(
+  `*[_type == "portfolio" && _id =="portfolio"]{ PDF {asset -> {url}}}[0].PDF.asset.url`
 );
 
 export const OSCILLOBAT_QUERY = defineQuery(
   `*[_type == "oscillobat" && _id =="oscillobat"]{
   slices[] {
-    _type != "textblock" => @->{image , alt, credit},
+    _type != "textblock" => @->{image , alt, credit , _type},
     _type == "textblock" => @,
     }
   }[0].slices`

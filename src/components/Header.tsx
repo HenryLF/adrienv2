@@ -5,16 +5,15 @@ import { client } from "@/sanity/lib/client";
 import {
   BIO_QUERY,
   OSCILLOBAT_QUERY,
-  PORTFOLIO_QUERY,
+  PORTFOLIO_URL_QUERY,
 } from "@/sanity/lib/query";
 import BioPage from "./BioPage";
 import OscilloPage from "./OscilloPage";
 
 export default async function Header() {
   const bioData = await client.fetch(BIO_QUERY);
-  const portfolioData = await client.fetch(PORTFOLIO_QUERY);
+  const portfolioUrl = await client.fetch(PORTFOLIO_URL_QUERY);
   const oscilloData = await client.fetch(OSCILLOBAT_QUERY);
-
   return (
     <header
       className="flex flex-row flex-wrap justify-between items-center 
@@ -25,7 +24,7 @@ export default async function Header() {
       </Link>
 
       <div className="flex flex-row justify-evenly items-center flex-1">
-        <Link href={portfolioData?.asset?.url ?? "/"}>
+        <Link href={portfolioUrl ?? "/"}>
           <span className="header-link">PortFolio</span>
         </Link>
 
