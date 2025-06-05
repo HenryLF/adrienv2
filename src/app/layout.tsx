@@ -17,11 +17,13 @@ export const metadata: Metadata = {
   description: "Portfolio d'Adrien Milon.",
 };
 
-export default  function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+
   return (
     <html lang="en">
       <body

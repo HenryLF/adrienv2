@@ -40,6 +40,7 @@ export function SanityImage({
           fill
           className="object-cover"
           alt={picture.alt ?? ""}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div
           className={`credit ${mouseOver ? "-translate-y-0" : "-translate-y-full"}

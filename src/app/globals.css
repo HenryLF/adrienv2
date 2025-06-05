@@ -52,7 +52,7 @@ body {
 }
 
 .credit {
-  @apply backdrop-blur backdrop-brightness-50 w-fit p-0.5;
+  @apply backdrop-blur w-fit p-0.5;
   @apply text-xs;
 }
 

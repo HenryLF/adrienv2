@@ -13,9 +13,10 @@ export default async function Header() {
       className="flex flex-row flex-wrap justify-between items-center 
     min-h-large w-full space-x-small"
     >
-      <div>
+      <Link href="/">
         <h1 className="h1 ">Adrien Milon</h1>
-      </div>
+      </Link>
+      
       <div className="flex flex-row justify-evenly items-center flex-1">
         <Link href={portfolioData?.asset?.url ?? "/"}>
           <span className="header-link">PortFolio</span>
