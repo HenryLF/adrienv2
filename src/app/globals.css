@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --spacing-small: 2vw;
-  --spacing-main: 4vw;
-  --spacing-large: clamp(0px, 80px, 8vw);
+  --spacing-small: clamp(0px, 2vw, 80px);
+  --spacing-main: clamp(0px, 4vw, 120px);
+  --spacing-large: clamp(0px, 8vw, 150px);
   --color-opacity: #a0a0a0a0;
 }
 body {
