@@ -131,6 +131,25 @@ export type Bio = {
   }>;
 };
 
+export type Video = {
+  _id: string;
+  _type: "video";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  video?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+    };
+    media?: unknown;
+    _type: "file";
+  };
+};
+
 export type Picture = {
   _id: string;
   _type: "picture";
@@ -190,6 +209,12 @@ export type Project = {
   }>;
   materials?: Array<string>;
   dimension?: string;
+  video?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "video";
+  };
 };
 
 export type SanityImagePaletteSwatch = {
@@ -310,11 +335,11 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = Oscillobat | Portfolio | Background | Bio | Picture | Project | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = Oscillobat | Portfolio | Background | Bio | Video | Picture | Project | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/query.ts
 // Variable: ALL_PROJECT_QUERY
-// Query: *[_type == "project"]{... , pictures[]->{...}}
+// Query: *[_type == "project"]{  ... ,  pictures[]->{...} ,  video -> {... , video{asset -> {url }} }  }
 export type ALL_PROJECT_QUERYResult = Array<{
   _id: string;
   _type: "project";
@@ -366,9 +391,22 @@ export type ALL_PROJECT_QUERYResult = Array<{
   }>;
   materials?: Array<string>;
   dimension?: string;
+  video: {
+    _id: string;
+    _type: "video";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title?: string;
+    video: {
+      asset: {
+        url: string | null;
+      } | null;
+    } | null;
+  } | null;
 }>;
 // Variable: PROJECT_QUERY
-// Query: *[_type == "project" && slug.current == $slug]{... , pictures[]->{...}}[0]
+// Query: *[_type == "project" && slug.current == $slug]{  ... , pictures[]->{...} ,  video -> {... , video{asset -> {url }} }  }[0]
 export type PROJECT_QUERYResult = {
   _id: string;
   _type: "project";
@@ -420,6 +458,19 @@ export type PROJECT_QUERYResult = {
   }>;
   materials?: Array<string>;
   dimension?: string;
+  video: {
+    _id: string;
+    _type: "video";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title?: string;
+    video: {
+      asset: {
+        url: string | null;
+      } | null;
+    } | null;
+  } | null;
 } | null;
 // Variable: BIO_QUERY
 // Query: *[_type == "bio" && _id=="bio" ]{...}[0]
@@ -535,8 +586,8 @@ export type OSCILLOBAT_QUERYResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"project\"]{... , pictures[]->{...}}": ALL_PROJECT_QUERYResult;
-    "*[_type == \"project\" && slug.current == $slug]{... , pictures[]->{...}}[0]": PROJECT_QUERYResult;
+    "*[_type == \"project\"]{\n  ... ,\n  pictures[]->{...} ,\n  video -> {... , video{asset -> {url }} }\n  }": ALL_PROJECT_QUERYResult;
+    "*[_type == \"project\" && slug.current == $slug]{\n  ... , pictures[]->{...} ,\n  video -> {... , video{asset -> {url }} }\n  }[0]": PROJECT_QUERYResult;
     "*[_type == \"bio\" && _id==\"bio\" ]{...}[0]": BIO_QUERYResult;
     "*[_type == \"background\" && _id == \"background\"]{...}[0]": BACKGROUND_QUERYResult;
     "*[_type == \"portfolio\" && _id ==\"portfolio\"]{ PDF {asset -> {url}}}[0].PDF.asset.url": PORTFOLIO_URL_QUERYResult;

@@ -1,11 +1,18 @@
 import { defineQuery } from "next-sanity";
 
 export const ALL_PROJECT_QUERY = defineQuery(
-  `*[_type == "project"]{... , pictures[]->{...}}`
+  `*[_type == "project"]{
+  ... ,
+  pictures[]->{...} ,
+  video -> {... , video{asset -> {url }} }
+  }`
 );
 
 export const PROJECT_QUERY = defineQuery(
-  `*[_type == "project" && slug.current == $slug]{... , pictures[]->{...}}[0]`
+  `*[_type == "project" && slug.current == $slug]{
+  ... , pictures[]->{...} ,
+  video -> {... , video{asset -> {url }} }
+  }[0]`
 );
 
 export const BIO_QUERY = defineQuery(

@@ -9,19 +9,26 @@ type PropType = {
   picture: Picture;
   creditRight?: boolean;
   className?: string;
-  maxHeight? : string;
+  aspectRatioPortrait?: string | number | null;
+  aspectRatioLandscape?: string | number | null;
 };
 
 export function SanityImage({
   picture,
   creditRight = false,
+  aspectRatioPortrait = "4/5",
+  aspectRatioLandscape = "4/3",
   className = "",
 }: PropType) {
   const [mouseOver, setMouseOver] = useState<boolean>(false);
 
   const { image } = picture;
   if (!image) return <></>;
+
   const { aspectRatio } = getImageDimensions(image as SanityImageSource);
+
+  aspectRatioLandscape = aspectRatioLandscape ?? aspectRatio;
+  aspectRatioPortrait = aspectRatioPortrait ?? aspectRatio;
 
   const isSquare = Math.abs(aspectRatio - 1) < 0.1;
   if (picture?.image)
@@ -29,7 +36,11 @@ export function SanityImage({
       <div
         className={className}
         style={{
-          aspectRatio: isSquare ? 1 : aspectRatio < 1 ? "3/4" : "4/3",
+          aspectRatio: isSquare
+            ? 1
+            : aspectRatio < 1
+              ? aspectRatioPortrait
+              : aspectRatioLandscape,
           overflow: "hidden",
           position: "relative",
         }}
@@ -46,7 +57,7 @@ export function SanityImage({
         <div
           className={`credit ${mouseOver ? "-translate-y-0" : "-translate-y-full"}
              transition-transform duration-500 ease-in-out
-             ${creditRight ? "left-0" : "right-0"} top-0
+             asbsolute ${creditRight ? "left-0" : "right-0"} top-0
              `}
         >
           {picture.credit && `crédit : ${picture.credit}`}

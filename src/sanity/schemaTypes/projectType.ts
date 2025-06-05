@@ -1,5 +1,6 @@
 import { defineField, defineType } from "sanity";
 import pictureType from "./pictureType";
+import videoType from "./videoType";
 
 export default defineType({
   name: "project",
@@ -65,6 +66,12 @@ export default defineType({
       type: "string",
       name: "dimension",
       title: "Dimension",
+    }),
+    defineField({
+      type: "reference",
+      name: "video",
+      title: "Video",
+      to: [videoType],
     }),
   ],
   orderings: [

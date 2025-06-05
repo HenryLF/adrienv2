@@ -1,11 +1,13 @@
 import { PROJECT_QUERYResult } from "../../sanity.types";
 import { SanityImage } from "./SanityImage";
 import { TextMain } from "./SanityText";
+import VideoPlayer from "./VideoPlayer";
 
 function camelCase(s: string | null | undefined) {
   if (!s) return "";
   return s[0].toUpperCase() + s.slice(1);
 }
+
 type PropType = { data: PROJECT_QUERYResult };
 export default function ProjectPage({ data }: PropType) {
   return (
@@ -19,7 +21,14 @@ export default function ProjectPage({ data }: PropType) {
       <div className="flex flex-col space-y-small px-main">
         {data?.pictures?.map((pic, key) => {
           if (key == 0) {
-            return <SanityImage picture={pic} key={key} className="w-full" />;
+            return (
+              <SanityImage
+                picture={pic}
+                key={key}
+                aspectRatioLandscape={null}
+                className="w-full"
+              />
+            );
           }
           return <SanityImage picture={pic} key={key} className="w-3/5" />;
         })}
@@ -29,6 +38,15 @@ export default function ProjectPage({ data }: PropType) {
         <span className="main">{camelCase(data?.materials?.join(", "))}</span>
         <span className="main">{data?.dimension}</span>
       </div>
+      {data?.video?.video?.asset?.url && (
+        <div>
+          <h3 className="h3 m-small"> {data.video.title} </h3>
+          <VideoPlayer
+            url={data.video.video.asset.url}
+            className="md:max-w-4/5 lg:max-w-3/5"
+          />
+        </div>
+      )}
       <div className="size-large"></div>
     </div>
   );

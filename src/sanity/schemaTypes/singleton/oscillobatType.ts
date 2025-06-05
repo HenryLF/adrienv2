@@ -28,6 +28,12 @@ export default defineType({
           name: "picture",
           to: [pictureType],
         },
+        {
+          title: "Vidéo",
+          type: "reference",
+          name: "picture",
+          to: [pictureType],
+        },
       ],
     }),
   ],

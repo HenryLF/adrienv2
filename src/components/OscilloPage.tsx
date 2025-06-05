@@ -1,15 +1,15 @@
 import Image from "next/image";
-import { OSCILLOBAT_QUERYResult } from "../../sanity.types";
+import { OSCILLOBAT_QUERYResult, Picture } from "../../sanity.types";
 import { TextMain } from "./SanityText";
 import { urlFor } from "@/sanity/lib/image";
 import { SanityImageSource } from "@sanity/asset-utils";
+import { SanityImage } from "./SanityImage";
 
 export default function OscilloPage({
   data,
 }: {
   data: OSCILLOBAT_QUERYResult;
 }) {
-  console.log(data);
   return (
     <div className="modal-container justify-center items-center ">
       <h1 className="h1 self-start">Oscillobat</h1>
@@ -18,13 +18,11 @@ export default function OscilloPage({
           return <TextMain content={slice.content ?? []} key={key} />;
         }
         return (
-          <Image
+          <SanityImage
+            aspectRatioLandscape={null}
             key={key}
-            src={urlFor(slice.image as SanityImageSource).url()}
-            height={100}
-            width={100}
-            alt={slice.alt ?? "Une photo de l'Oscillobat."}
-            className="w-8/10 h-auto"
+            picture={slice as Picture}
+            className="w-5/10"
           />
         );
       })}
