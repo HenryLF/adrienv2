@@ -34,13 +34,13 @@ export default function ProjectPage({ data }: PropType) {
         })}
       </div>
       <div className="flex flex-col ml-large">
-        <span className="main">{data?.name}</span>
-        <span className="main">{camelCase(data?.materials?.join(", "))}</span>
-        <span className="main">{data?.dimension}</span>
+        <span className="main-text">{data?.name}</span>
+        <span className="main-text">{camelCase(data?.materials?.join(", "))}</span>
+        <span className="main-text">{data?.dimension}</span>
       </div>
       {data?.video?.video?.asset?.url && (
-        <div>
-          <h3 className="h3 m-small"> {data.video.title} </h3>
+        <div className="p-small">
+          <h3 className="h3"> {data.video.title} </h3>
           <VideoPlayer
             url={data.video.video.asset.url}
             className="md:max-w-4/5 lg:max-w-3/5"

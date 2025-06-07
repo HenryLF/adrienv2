@@ -19,34 +19,52 @@ export type Oscillobat = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  slices?: Array<{
-    content?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
+  slices?: Array<
+    | {
+        content?: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?:
+            | "normal"
+            | "h1"
+            | "h2"
+            | "h3"
+            | "h4"
+            | "h5"
+            | "h6"
+            | "blockquote";
+          listItem?: "bullet" | "number";
+          markDefs?: Array<{
+            href?: string;
+            _type: "link";
+            _key: string;
+          }>;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }>;
+        _type: "textblock";
         _key: string;
-      }>;
-      style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-      listItem?: "bullet" | "number";
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
         _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }>;
-    _type: "textblock";
-    _key: string;
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "picture";
-  }>;
+        [internalGroqTypeReferenceTo]?: "picture";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        _key: string;
+        [internalGroqTypeReferenceTo]?: "video";
+      }
+  >;
 };
 
 export type Portfolio = {
@@ -335,7 +353,25 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = Oscillobat | Portfolio | Background | Bio | Video | Picture | Project | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes =
+  | Oscillobat
+  | Portfolio
+  | Background
+  | Bio
+  | Video
+  | Picture
+  | Project
+  | SanityImagePaletteSwatch
+  | SanityImagePalette
+  | SanityImageDimensions
+  | SanityImageHotspot
+  | SanityImageCrop
+  | SanityFileAsset
+  | SanityImageAsset
+  | SanityImageMetadata
+  | Geopoint
+  | Slug
+  | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/query.ts
 // Variable: ALL_PROJECT_QUERY
@@ -542,55 +578,61 @@ export type BACKGROUND_QUERYResult = {
 // Query: *[_type == "portfolio" && _id =="portfolio"]{ PDF {asset -> {url}}}[0].PDF.asset.url
 export type PORTFOLIO_URL_QUERYResult = string | null;
 // Variable: OSCILLOBAT_QUERY
-// Query: *[_type == "oscillobat" && _id =="oscillobat"]{  slices[] {    _type != "textblock" => @->{image , alt, credit , _type},    _type == "textblock" => @,    }  }[0].slices
-export type OSCILLOBAT_QUERYResult = Array<{
-  content?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
+// Query: *[_type == "oscillobat" && _id =="oscillobat"]{  slices[] {    _type == "textblock" => @{... , _type},    _type == "picture" => @->{image , alt, credit , _type},    _type == "video" => @-> {... , video{asset -> {url }} },    }  }[0].slices
+export type OSCILLOBAT_QUERYResult = Array<
+  | {
+      content?: Array<{
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?:
+          | "blockquote"
+          | "h1"
+          | "h2"
+          | "h3"
+          | "h4"
+          | "h5"
+          | "h6"
+          | "normal";
+        listItem?: "bullet" | "number";
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }>;
+      _type: "textblock";
       _key: string;
-    }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-  _type: "textblock";
-  _key: string;
-} | {
-  image: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  } | null;
-  alt: string | null;
-  credit: string | null;
-  _type: "picture";
-}> | null;
+    }
+  | {
+      _type: "video";
+      video: {
+        asset: {
+          url: string;
+        };
+      };
+      title: string;
+    }
+  | {
+    _type :"picture";
+  }
+> | null;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"project\"]{\n  ... ,\n  pictures[]->{...} ,\n  video -> {... , video{asset -> {url }} }\n  }": ALL_PROJECT_QUERYResult;
-    "*[_type == \"project\" && slug.current == $slug]{\n  ... , pictures[]->{...} ,\n  video -> {... , video{asset -> {url }} }\n  }[0]": PROJECT_QUERYResult;
-    "*[_type == \"bio\" && _id==\"bio\" ]{...}[0]": BIO_QUERYResult;
-    "*[_type == \"background\" && _id == \"background\"]{...}[0]": BACKGROUND_QUERYResult;
-    "*[_type == \"portfolio\" && _id ==\"portfolio\"]{ PDF {asset -> {url}}}[0].PDF.asset.url": PORTFOLIO_URL_QUERYResult;
-    "*[_type == \"oscillobat\" && _id ==\"oscillobat\"]{\n  slices[] {\n    _type != \"textblock\" => @->{image , alt, credit , _type},\n    _type == \"textblock\" => @,\n    }\n  }[0].slices": OSCILLOBAT_QUERYResult;
+    '*[_type == "project"]{\n  ... ,\n  pictures[]->{...} ,\n  video -> {... , video{asset -> {url }} }\n  }': ALL_PROJECT_QUERYResult;
+    '*[_type == "project" && slug.current == $slug]{\n  ... , pictures[]->{...} ,\n  video -> {... , video{asset -> {url }} }\n  }[0]': PROJECT_QUERYResult;
+    '*[_type == "bio" && _id=="bio" ]{...}[0]': BIO_QUERYResult;
+    '*[_type == "background" && _id == "background"]{...}[0]': BACKGROUND_QUERYResult;
+    '*[_type == "portfolio" && _id =="portfolio"]{ PDF {asset -> {url}}}[0].PDF.asset.url': PORTFOLIO_URL_QUERYResult;
+    '*[_type == "oscillobat" && _id =="oscillobat"]{\n  slices[] {\n    _type == "textblock" => @{... , _type},\n    _type == "picture" => @->{image , alt, credit , _type},\n    _type == "video" => @-> {... , video{asset -> {url }} },\n    }\n  }[0].slices': OSCILLOBAT_QUERYResult;
   }
 }

@@ -1,9 +1,7 @@
-import Image from "next/image";
 import { OSCILLOBAT_QUERYResult, Picture } from "../../sanity.types";
 import { TextMain } from "./SanityText";
-import { urlFor } from "@/sanity/lib/image";
-import { SanityImageSource } from "@sanity/asset-utils";
 import { SanityImage } from "./SanityImage";
+import VideoPlayer from "./VideoPlayer";
 
 export default function OscilloPage({
   data,
@@ -11,20 +9,26 @@ export default function OscilloPage({
   data: OSCILLOBAT_QUERYResult;
 }) {
   return (
-    <div className="modal-container justify-center items-center ">
+    <div className="modal-container justify-center items-center">
       <h1 className="h1 self-start">Oscillobat</h1>
       {data?.map((slice, key) => {
-        if (slice._type == "textblock") {
-          return <TextMain content={slice.content ?? []} key={key} />;
+        switch (slice._type) {
+          case "textblock":
+            return <TextMain content={slice.content ?? []} key={key} />;
+          case "picture":
+            return (
+              <SanityImage
+                aspectRatioLandscape={null}
+                key={key}
+                picture={slice as Picture}
+                className="w-8/10 xl:w-6/10"
+              />
+            );
+          case "video":
+            return <VideoPlayer url={slice.video.asset.url}  key={key} className="w-8/10"/>;
+          default:
+            return <></>;
         }
-        return (
-          <SanityImage
-            aspectRatioLandscape={null}
-            key={key}
-            picture={slice as Picture}
-            className="w-5/10"
-          />
-        );
       })}
     </div>
   );

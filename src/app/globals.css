@@ -30,10 +30,10 @@ body {
   @apply ml-5;
 }
 
-.main {
+.main-text {
   @apply italic;
 }
-.head {
+.head-text {
   @apply font-bold;
 }
 
@@ -45,11 +45,6 @@ body {
   @apply w-full flex justify-center;
 }
 
-.overlay {
-  @apply fixed top-0 left-0 size-full z-50 p-large;
-  @apply overflow-y-scroll;
-  @apply backdrop-blur-[1px];
-}
 
 .credit {
   @apply backdrop-blur w-fit p-0.5;
@@ -60,10 +55,17 @@ body {
   @apply border-dotted border-black;
 }
 .modal-container {
-  @apply flex flex-col ;
-  @apply h-fit min-h-full w-full;
+  @apply flex flex-col;
+  @apply size-full overflow-y-scroll;
   @apply p-main space-y-main;
   @apply bg-white;
   @apply border-dotted border-black border-2;
   @apply p-large;
+}
+.overlay {
+  @apply fixed top-0 left-0 size-full;
+  @apply overflow-hidden z-50;
+  @apply p-large lg:p-main;
+  @apply pb-main lg:pb-small;
+  @apply backdrop-blur-[1px];
 }

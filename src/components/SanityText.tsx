@@ -18,7 +18,7 @@ export function TextHead({ content, maxWidth }: PropType) {
             <h2 className="h2"> {children}</h2>
           ),
           normal: ({ children }: { children: ReactNode }) => (
-            <p className="head">{children}</p>
+            <p className="head-text">{children}</p>
           ),
           link: ({ children, href }: { children: ReactNode; href: string }) => (
             <Link className="underline" href={href}>
@@ -44,7 +44,7 @@ export function TextMain({ content, maxWidth }: PropType) {
             <h2 className="h2"> {children}</h2>
           ),
           normal: ({ children }: { children: ReactNode }) => (
-            <p className="main">{children}</p>
+            <p className="main-text">{children}</p>
           ),
           link: ({ children, href }: { children: ReactNode; href: string }) => (
             <Link className="underline" href={href}>

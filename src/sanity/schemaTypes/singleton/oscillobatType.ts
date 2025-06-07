@@ -1,5 +1,6 @@
 import { defineField, defineType } from "sanity";
 import pictureType from "../pictureType";
+import videoType from "../videoType";
 
 export default defineType({
   name: "oscillobat",
@@ -31,8 +32,8 @@ export default defineType({
         {
           title: "Vidéo",
           type: "reference",
-          name: "picture",
-          to: [pictureType],
+          name: "video",
+          to: [videoType],
         },
       ],
     }),

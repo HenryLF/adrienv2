@@ -7,15 +7,12 @@ import { urlFor } from "@/sanity/lib/image";
 import ProjectPage from "./ProjectPage";
 import ClickableModal from "./ClickableModal";
 import { SanityImageSource } from "@sanity/asset-utils";
+import isTouchDevice from "@/app/lib/isTouchDevice";
 type PropType = {
   data?: PROJECT_QUERYResult;
 };
 
 const TRANSITION_DURATION = 5_000;
-
-function isTouchDevice() {
-  return "ontouchstart" in globalThis;
-}
 
 export default function ProjectCard({ data }: PropType) {
   const [mouseOver, setMouseOver] = useState(false);

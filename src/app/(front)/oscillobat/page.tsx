@@ -7,11 +7,9 @@ export default async function Home() {
   const data = await client.fetch(OSCILLOBAT_QUERY);
   if (data)
     return (
-      <main>
-        <section className="px-large py-main">
+        <main className="px-large py-main">
           <OscilloPage data={data} />
-        </section>
-      </main>
+        </main>
     );
   return (
     <main>

@@ -20,7 +20,7 @@ export default async function Header() {
     min-h-large w-full space-x-small"
     >
       <Link href="/">
-        <h1 className="h1 ">Adrien Milon</h1>
+        <h1 className="h1 pl-small">Adrien Milon</h1>
       </Link>
 
       <div className="flex flex-row justify-evenly items-center flex-1">

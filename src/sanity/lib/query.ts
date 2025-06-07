@@ -30,8 +30,9 @@ export const PORTFOLIO_URL_QUERY = defineQuery(
 export const OSCILLOBAT_QUERY = defineQuery(
   `*[_type == "oscillobat" && _id =="oscillobat"]{
   slices[] {
-    _type != "textblock" => @->{image , alt, credit , _type},
-    _type == "textblock" => @,
+    _type == "textblock" => @{... , _type},
+    _type == "picture" => @->{image , alt, credit , _type},
+    _type == "video" => @-> {... , video{asset -> {url }} },
     }
   }[0].slices`
 );
