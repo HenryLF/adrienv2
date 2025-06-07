@@ -51,6 +51,7 @@ export function SanityImage({
           src={urlFor(picture.image).format("webp").url()}
           fill
           className="object-cover"
+          priority
           alt={picture.alt ?? ""}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />

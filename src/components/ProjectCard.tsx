@@ -53,6 +53,7 @@ export default function ProjectCard({ data }: PropType) {
               .format("webp")
               .url()}
             fill
+            priority
             className="object-cover"
             alt={data?.pictures?.at(0)?.alt ?? ""}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

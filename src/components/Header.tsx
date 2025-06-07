@@ -29,7 +29,7 @@ export default async function Header() {
         </Link>
 
         <ClickableModal content={<BioPage data={bioData} />}>
-          <span className="header-link">BIO</span>
+          <span className="header-link">Bio</span>
         </ClickableModal>
 
         <ClickableModal content={<OscilloPage data={oscilloData} />}>
