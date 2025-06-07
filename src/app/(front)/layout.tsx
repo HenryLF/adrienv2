@@ -29,7 +29,7 @@ export default async function RootLayout({
   const backgroundData = await client.fetch(BACKGROUND_QUERY);
 
   const backgroundURL =
-    backgroundData?.image && urlFor(backgroundData.image).url();
+    backgroundData?.image && urlFor(backgroundData.image).format("webp").url();
 
   return (
     <div

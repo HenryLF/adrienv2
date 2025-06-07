@@ -48,7 +48,7 @@ export function SanityImage({
         onMouseLeave={() => setMouseOver(false)}
       >
         <Image
-          src={urlFor(picture.image).url()}
+          src={urlFor(picture.image).format("webp").url()}
           fill
           className="object-cover"
           alt={picture.alt ?? ""}

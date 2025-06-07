@@ -49,7 +49,9 @@ export default function ProjectCard({ data }: PropType) {
       >
         {
           <Image
-            src={urlFor(data.pictures?.at(0)?.image as SanityImageSource).url()}
+            src={urlFor(data.pictures?.at(0)?.image as SanityImageSource)
+              .format("webp")
+              .url()}
             fill
             className="object-cover"
             alt={data?.pictures?.at(0)?.alt ?? ""}
