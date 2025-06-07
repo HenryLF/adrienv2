@@ -47,7 +47,6 @@ export default function ProjectPage({ data }: PropType) {
           />
         </div>
       )}
-      <div className="size-large"></div>
     </div>
   );
 }

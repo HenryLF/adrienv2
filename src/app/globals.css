@@ -57,7 +57,7 @@ body {
 .modal-container {
   @apply flex flex-col;
   @apply size-full overflow-y-scroll;
-  @apply p-main space-y-main;
+  @apply px-main py-large space-y-main;
   @apply bg-white;
   @apply border-dotted border-black border-2;
   @apply p-large;
