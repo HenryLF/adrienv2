@@ -36,7 +36,10 @@ body {
 .head-text {
   @apply font-bold;
 }
-
+.anim-grow {
+  @apply hover:scale-110 transition-transform;
+  @apply ease-in-out duration-200;
+}
 .header-link {
   @apply text-xl font-bold cursor-pointer;
   @apply sm:opacity-50 hover:opacity-100  hover:scale-110;
@@ -76,4 +79,6 @@ body {
   @apply z-52;
   @apply size-large sm:size-main xl:size-small;
   @apply m-small;
+  @apply sm:opacity-50 hover:opacity-100  hover:scale-110;
+  @apply transition-transform duration-200 ease-in-out;
 }

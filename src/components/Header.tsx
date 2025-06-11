@@ -19,9 +19,9 @@ export default async function Header() {
       className="flex flex-row flex-wrap justify-between items-center 
     min-h-large w-full space-x-small"
     >
-      <Link href="/">
-        <h1 className="h1 pl-small">Adrien Milon</h1>
-      </Link>
+      <h1 className="h1 pl-small">
+        <Link href="/">Adrien Milon</Link>
+      </h1>
 
       <div className="flex flex-row justify-evenly items-center flex-1">
         <span className="header-link">
@@ -46,7 +46,7 @@ export default async function Header() {
             height={50}
             width={50}
             alt="instagram logo"
-            className="min-size-5"
+            className="min-size-5 anim-grow"
           />
         </Link>
       </div>
