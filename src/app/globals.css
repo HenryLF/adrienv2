@@ -39,6 +39,8 @@ body {
 
 .header-link {
   @apply text-xl font-bold cursor-pointer;
+  @apply sm:opacity-50 hover:opacity-100  hover:scale-110;
+  @apply transition-transform duration-200 ease-in-out;
 }
 
 .section {
@@ -72,6 +74,6 @@ body {
 .overlay-close {
   @apply fixed top-large lg:top-main right-large lg:right-main;
   @apply z-52;
-  @apply  size-large sm:size-main xl:size-small;
+  @apply size-large sm:size-main xl:size-small;
   @apply m-small;
 }

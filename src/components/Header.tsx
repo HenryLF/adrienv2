@@ -24,9 +24,9 @@ export default async function Header() {
       </Link>
 
       <div className="flex flex-row justify-evenly items-center flex-1">
-        <Link href={portfolioUrl ?? "/"}>
-          <span className="header-link">PortFolio</span>
-        </Link>
+        <span className="header-link">
+          <Link href={portfolioUrl ?? "/"}>PortFolio </Link>
+        </span>
 
         <ClickableModal content={<BioPage data={bioData} />}>
           <span className="header-link">Bio</span>
@@ -46,7 +46,7 @@ export default async function Header() {
             height={50}
             width={50}
             alt="instagram logo"
-            className="min-size-5 "
+            className="min-size-5"
           />
         </Link>
       </div>
