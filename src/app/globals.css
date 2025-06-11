@@ -45,7 +45,6 @@ body {
   @apply w-full flex justify-center;
 }
 
-
 .credit {
   @apply backdrop-blur w-fit p-0.5;
   @apply text-xs;
@@ -68,4 +67,11 @@ body {
   @apply p-large lg:p-main;
   @apply pb-main lg:pb-small;
   @apply backdrop-blur-[1px];
+}
+
+.overlay-close {
+  @apply fixed top-large lg:top-main right-large lg:right-main;
+  @apply z-52;
+  @apply  size-large sm:size-main xl:size-small;
+  @apply m-small;
 }

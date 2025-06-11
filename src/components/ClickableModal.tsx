@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import {
   ReactElement,
   cloneElement,
@@ -28,7 +29,17 @@ export default function ClickableModal({ content, children }: PropType) {
     <>
       {children}
       <section className="section overlay" onClick={() => setVisible(false)}>
-        {content}
+        <Image
+          src="/close.svg"
+          height={50}
+          width={50}
+          alt="close-icon"
+          onClick={() => setVisible(false)}
+          className="overlay-close"
+        />
+        <div onClick={(e) => e.stopPropagation()} className="size-full">
+          {content}
+        </div>
       </section>
     </>
   );
